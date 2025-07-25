@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import math
 
 st.set_page_config(page_title="Kuma Schallausbreitungsrechner", layout="centered")
 
@@ -9,7 +10,6 @@ with col_title:
     st.image("https://www.bayern-innovativ.de/fileadmin/map/bilder/bayern-innovativ/messe/kundenlogos/kumandra-ryve500px.jpg", width=300)
 
 st.title("\U0001F50A Schallausbreitungs-berechnung nach vereinfachter Methode")
-
 
 st.markdown("""
 Dieses Tool berechnet den **Schalldruckpegel** an einem Immissionsort basierend auf:
@@ -28,18 +28,24 @@ with col1:
     else:
         Lw = st.number_input("Schallleistungspegel [dB(A)]", min_value=40.0, max_value=150.0, value=91.0)
 
-with col1:
-    distance = st.number_input("Abstand zum Immissionsort [m]", min_value=1.0, max_value=1000.0, value=50.0)
+with col2:
+    distance = st.number_input("Abstand zum Immissionsort [m]", min_value=1.0, max_value=1000.0, value=50.0, key="distance_input")
     abschirmung = st.slider("Abschätzung Abschirmung durch Hindernisse [dB]", min_value=0, max_value=25, value=0)
     bodenwirkung = st.slider("Boden-/Bodenabsorption [dB]", min_value=-5, max_value=5, value=0)
     luftdampfung = st.slider("Luftabsorption (nur für große Distanzen) [dB]", min_value=0, max_value=5, value=0)
+
+# Debug: zeige eingegebenen Abstand
+st.write(f"Aktueller Abstand: {distance} m")
 
 # Umrechnung Lp@1m zu Lw falls erforderlich
 if eingabe_typ == "Schalldruckpegel @1 m (Lp)":
     Lw = Lp_1m + 8  # konservativ: Halbraum
 
-# Geometrische Ausbreitung
-A_div = 20 * np.log10(distance) + 11
+# Geometrische Ausbreitung sicher berechnen
+if distance > 0:
+    A_div = 20 * math.log10(distance) + 11
+else:
+    A_div = 0  # Fallbackwert
 
 # Gesamtdämpfung
 A_total = A_div + luftdampfung + bodenwirkung + abschirmung
