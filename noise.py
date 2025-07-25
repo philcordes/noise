@@ -3,7 +3,13 @@ import numpy as np
 
 st.set_page_config(page_title="Kuma Schallausbreitungsrechner", layout="centered")
 
-st.title("\U0001F50A Kuma Schallausbreitungs-berechnung nach vereinfachter Methode")
+# Kopfzeile mit Logo
+col_logo, col_title = st.columns([5, 1])
+with col_title:
+    st.image("https://www.bayern-innovativ.de/fileadmin/map/bilder/bayern-innovativ/messe/kundenlogos/kumandra-ryve500px.jpg", width=300)
+
+st.title("\U0001F50A Schallausbreitungs-berechnung nach vereinfachter Methode")
+
 
 st.markdown("""
 Dieses Tool berechnet den **Schalldruckpegel** an einem Immissionsort basierend auf:
