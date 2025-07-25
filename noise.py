@@ -1,9 +1,9 @@
 import streamlit as st
 import numpy as np
 
-st.set_page_config(page_title="Kumandra Schallausbreitungsrechner", layout="centered")
+st.set_page_config(page_title="Kuma Schallausbreitungsrechner", layout="centered")
 
-st.title("\U0001F50A Kumandra Schallausbreitungs-berechnung nach vereinfachter Methode")
+st.title("\U0001F50A Kuma Schallausbreitungs-berechnung nach vereinfachter Methode")
 
 st.markdown("""
 Dieses Tool berechnet den **Schalldruckpegel** an einem Immissionsort basierend auf:
