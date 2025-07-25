@@ -28,7 +28,7 @@ with col1:
     else:
         Lw = st.number_input("Schallleistungspegel [dB(A)]", min_value=40.0, max_value=150.0, value=91.0)
 
-with col2:
+with col1:
     distance = st.number_input("Abstand zum Immissionsort [m]", min_value=1.0, max_value=1000.0, value=50.0, key="distance_input")
     abschirmung = st.slider("Abschätzung Abschirmung durch Hindernisse [dB]", min_value=0, max_value=25, value=0)
     bodenwirkung = st.slider("Boden-/Bodenabsorption [dB]", min_value=-5, max_value=5, value=0)
